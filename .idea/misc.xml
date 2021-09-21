@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/EON-39/AndroidStudioProjects/MCFS/app/src/main/res/drawable/bkg_1.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/EON-39/AndroidStudioProjects/MCFS/app/src/main/res/drawable/ic_right_solid.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/EON-39/AndroidStudioProjects/MCFS/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/EON-39/AndroidStudioProjects/MCFS/app/src/main/res/layout/activity_main.xml" value="0.178125" />
+        <entry key="..\:/Users/EON-39/AndroidStudioProjects/MCFS/app/src/main/res/layout/item_home_option.xml" value="0.1921875" />
       </map>
     </option>
   </component>
