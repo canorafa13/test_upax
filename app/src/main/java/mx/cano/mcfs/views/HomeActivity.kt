@@ -9,19 +9,19 @@ import androidx.work.WorkManager
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import mx.cano.mcfs.databinding.ActivityMainBinding
+import mx.cano.mcfs.databinding.ActivityHomeBinding
 import mx.cano.mcfs.datamodel.collections.Device
 import mx.cano.mcfs.datamodel.collections.Position
 import mx.cano.mcfs.services.WorkLocation
 import java.util.concurrent.TimeUnit
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class HomeActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityHomeBinding
 
     private val TAG: String = "TAG_APP"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 

@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         if (StorageSession.EMAIL.get(this) != ""){
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, HomeActivity::class.java))
             finish()
         }else{
             binding.login.setOnClickListener {
@@ -33,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
         val googleClient = GoogleClientApp(this).getGoogleClient()
         googleClient.signOut()
 
-        var loginGoogleLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK && result.data != null) {
                 try {
                     val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
                     } else {
                         StorageSession.PHOTO_URL.save(this, "")
                     }
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, HomeActivity::class.java))
                     finish()
                 }catch (e: ApiException){
                     e.printStackTrace()
@@ -55,8 +55,7 @@ class LoginActivity : AppCompatActivity() {
             }else{
                 showError()
             }
-        }
-        loginGoogleLauncher.launch(googleClient.signInIntent)
+        }.launch(googleClient.signInIntent)
     }
 
 
