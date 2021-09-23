@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import mx.cano.mcfs.BuildConfig
 
 enum class StorageSession {
-    ID,
     EMAIL,
     NAME,
     PHOTO_URL;

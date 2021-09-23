@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mx.cano.mcfs">
+
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,6 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MCFS">
+        <receiver
+            android:name=".services.ServiceLocation"></receiver>
+
         <activity
             android:name=".views.LoginActivity"
             android:exported="true">
@@ -22,8 +27,7 @@
         </activity>
         <activity
             android:name=".views.HomeActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>

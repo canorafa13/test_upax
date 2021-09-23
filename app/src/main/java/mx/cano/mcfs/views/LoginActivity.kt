@@ -9,10 +9,36 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
 import mx.cano.mcfs.conf.GoogleClientApp
 import mx.cano.mcfs.databinding.ActivityLoginBinding
+import mx.cano.mcfs.storage.StorageOnline
 import mx.cano.mcfs.storage.StorageSession
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+    val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == RESULT_OK && result.data != null) {
+            try {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                val account = task.getResult(ApiException::class.java)
+                StorageSession.NAME.save(this, account.displayName)
+                StorageSession.EMAIL.save(this, account.email)
+                if (account.photoUrl != null) {
+                    StorageSession.PHOTO_URL.save(this, account.photoUrl.toString())
+                } else {
+                    StorageSession.PHOTO_URL.save(this, "")
+                }
+                StorageOnline().sendUser(this)
+                    ?.addOnSuccessListener {
+                        startActivity(Intent(this, HomeActivity::class.java))
+                        finish()
+                    }
+            }catch (e: ApiException){
+                e.printStackTrace()
+                showError()
+            }
+        }else{
+            showError()
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -33,29 +59,9 @@ class LoginActivity : AppCompatActivity() {
         val googleClient = GoogleClientApp(this).getGoogleClient()
         googleClient.signOut()
 
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK && result.data != null) {
-                try {
-                    val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-                    val account = task.getResult(ApiException::class.java)
-                    StorageSession.ID.save(this, account.id)
-                    StorageSession.NAME.save(this, account.displayName)
-                    StorageSession.EMAIL.save(this, account.email)
-                    if (account.photoUrl != null) {
-                        StorageSession.PHOTO_URL.save(this, account.photoUrl.toString())
-                    } else {
-                        StorageSession.PHOTO_URL.save(this, "")
-                    }
-                    startActivity(Intent(this, HomeActivity::class.java))
-                    finish()
-                }catch (e: ApiException){
-                    e.printStackTrace()
-                    showError()
-                }
-            }else{
-                showError()
-            }
-        }.launch(googleClient.signInIntent)
+
+
+        launcher.launch(googleClient.signInIntent)
     }
 
 
