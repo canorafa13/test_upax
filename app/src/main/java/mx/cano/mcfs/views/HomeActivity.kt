@@ -23,6 +23,9 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.button.setOnClickListener {
+            startActivity(Intent(this, DBActivity::class.java))
+        }
         updateLoction()
 
     }

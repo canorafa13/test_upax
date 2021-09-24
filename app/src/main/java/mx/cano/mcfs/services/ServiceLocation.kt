@@ -19,7 +19,7 @@ class ServiceLocation : BroadcastReceiver() {
                 if (result != null){
                     location = result.lastLocation
                     context = p0
-                    if (!isUpdate){
+                    /*if (!isUpdate){
                         StorageOnline().sendLocation(context!!, location!!)
                             ?.addOnSuccessListener {
                                 isUpdate = true
@@ -27,7 +27,7 @@ class ServiceLocation : BroadcastReceiver() {
                             ?.addOnFailureListener {
                                 it.printStackTrace()
                             }
-                    }
+                    }*/
                 }
             }
 
@@ -44,7 +44,7 @@ class ServiceLocation : BroadcastReceiver() {
         private var interval = 1000 * 60 * 30
         private var location: Location? = null
         private var context: Context? = null
-        private var isUpdate = false
+       // private var isUpdate = false
 
         val taskUpdateLocation: Runnable = object : Runnable {
             override fun run() {
@@ -52,7 +52,7 @@ class ServiceLocation : BroadcastReceiver() {
                 if (location != null && context != null) {
                     StorageOnline().sendLocation(context!!, location!!)
                         ?.addOnSuccessListener {
-                            isUpdate = true
+            //                isUpdate = true
                             Log.e("TAG", "UPDATE LOCATION ONLINE")
                         }
                         ?.addOnFailureListener {
